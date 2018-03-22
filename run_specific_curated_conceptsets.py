@@ -2,7 +2,7 @@ from term_mapping_tools import run_sql_script, create_eval_table, run_mapping
 
 # config
 output_dir = './output'
-fake_etl_sql_filename = 'src/fake_condition_mappings2.sql'
+fake_etl_sql_filename = './fake_condition_mappings2.sql'
 evaltable_name = 'evaltable_concept_sets'
 make_new_fake_condition_table = False # setting to true will erase the previous fake condition table
 make_new_evaltable = False # setting to true will erase the table with the name specified in evaltable_name.
@@ -21,7 +21,7 @@ if make_new_evaltable:
 
 ############ Heart Failure ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/heart_failure3.sql'
+sql_filename = './concept_set_specific_queries/heart_failure3.sql'
 # configure these variables for each new concept set
 idx = 380
 query_filename = 'HeartFailurePQ_eMERGE_Local.sql' # file from sunny's big document
@@ -31,7 +31,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ No Heart Failure ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/no_heart_failure3.sql'
+sql_filename = './concept_set_specific_queries/no_heart_failure3.sql'
 # configure these variables for each new concept set
 idx = 'NULL'
 query_filename = 'HeartFailurePQ_eMERGE_Local.sql' # file from sunny's big document
@@ -41,7 +41,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############## ANY diabetes ##################
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/diabetes_any3.sql'
+sql_filename = './concept_set_specific_queries/diabetes_any3.sql'
 # configure these variables for each new concept set
 idx = 613
 query_filename = 'T2dmPQ_eMERGE_Local.sql' # file from sunny's big document
@@ -51,7 +51,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############# T1DM #######
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/diabetes_t1dm3.sql'
+sql_filename = './concept_set_specific_queries/diabetes_t1dm3.sql'
 # configure these variables for each new concept set
 idx = 614
 query_filename = 'T2dmPQ_eMERGE_Local.sql' # file from sunny's big document
@@ -61,7 +61,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ T2DM ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/diabetes_t2dm3.sql'
+sql_filename = './concept_set_specific_queries/diabetes_t2dm3.sql'
 # configure these variables for each new concept set
 idx = 615
 query_filename = 'T2dmPQ_eMERGE_Local.sql' # file from sunny's big document
@@ -71,7 +71,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ APPENDICITIS ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/appendicitis.sql'
+sql_filename = './concept_set_specific_queries/appendicitis.sql'
 # configure these variables for each new concept set
 idx = 33
 query_filename = 'AppendicitisPQ_eMERGE_Local.sql' # file from sunny's big document
@@ -81,7 +81,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ ADHD ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/adhd.sql'
+sql_filename = './concept_set_specific_queries/adhd.sql'
 # configure these variables for each new concept set
 idx = 22
 query_filename = 'AdhdPQ_eMERGE_Local.sql' # file from sunny's big document
@@ -91,7 +91,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ CATARACTS ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/cataracts.sql'
+sql_filename = './concept_set_specific_queries/cataracts.sql'
 # configure these variables for each new concept set
 idx = 'NULL'
 query_filename = 'NULL' # file from sunny's big document
@@ -101,7 +101,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ BEN KUMMER STROKE ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/KUMMER_stroke.sql'
+sql_filename = './concept_set_specific_queries/KUMMER_stroke.sql'
 # configure these variables for each new concept set
 idx = 'NULL'
 query_filename = 'NULL' # file from sunny's big document
@@ -111,7 +111,7 @@ run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, ev
 
 ############ CHRONS ##############
 # SQL script to set up code tables
-sql_filename = './src/concept_set_specific_queries/crohns.sql'
+sql_filename = './concept_set_specific_queries/crohns.sql'
 # configure these variables for each new concept set
 idx = 'NULL'
 query_filename = 'NULL' # file from sunny's big document
