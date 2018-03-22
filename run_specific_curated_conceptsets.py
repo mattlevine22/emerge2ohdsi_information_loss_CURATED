@@ -99,3 +99,23 @@ concept_set_name = 'DxCataracts' # sunny's name in the big document
 output_path = '{output_dir}/idx{idx}_cataracts/'.format(output_dir=output_dir, idx=idx)
 run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name)
 
+############ BEN KUMMER STROKE ##############
+# SQL script to set up code tables
+sql_filename = './src/concept_set_specific_queries/KUMMER_stroke.sql'
+# configure these variables for each new concept set
+idx = 'NULL'
+query_filename = 'NULL' # file from sunny's big document
+concept_set_name = 'DxKUMMER_stroke' # sunny's name in the big document
+output_path = '{output_dir}/idx{idx}_KUMMER_stroke/'.format(output_dir=output_dir, idx=idx)
+run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name)
+
+############ CHRONS ##############
+# SQL script to set up code tables
+sql_filename = './src/concept_set_specific_queries/crohns.sql'
+# configure these variables for each new concept set
+idx = 'NULL'
+query_filename = 'NULL' # file from sunny's big document
+concept_set_name = 'DxCrohns' # sunny's name in the big document
+output_path = '{output_dir}/idx{idx}_crohns/'.format(output_dir=output_dir, idx=idx)
+run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name)
+
