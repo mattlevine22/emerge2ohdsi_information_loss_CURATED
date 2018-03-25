@@ -148,3 +148,13 @@ query_filename = 'NULL' # file from sunny's big document
 concept_set_name = 'DxRheumatoidArthritis_2v2' # sunny's name in the big document
 output_path = '{output_dir}/idx{idx}_ra2v2/'.format(output_dir=output_dir, idx=idx)
 run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name)
+
+############ RA ##############
+# SQL script to set up code tables
+sql_filename = './concept_set_specific_queries/ra_2v2extra.sql'
+# configure these variables for each new concept set
+idx = 'NULL'
+query_filename = 'NULL' # file from sunny's big document
+concept_set_name = 'DxRheumatoidArthritis_2v2extra' # sunny's name in the big document
+output_path = '{output_dir}/idx{idx}_ra2v2extra/'.format(output_dir=output_dir, idx=idx)
+run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name)
