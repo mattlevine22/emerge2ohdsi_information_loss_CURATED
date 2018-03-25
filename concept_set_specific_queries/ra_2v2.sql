@@ -554,7 +554,7 @@ and c1.concept_id IN (
 4179528,
 4030552,
 4243205,
-4216531,
+4216531
 )
 order by concept_id;
 
