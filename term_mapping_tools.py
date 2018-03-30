@@ -57,6 +57,16 @@ def run_sql_script(sql_filename):
 	# 	pdb.set_trace()
 	# 	return
 
+def output_table_summary(codes_table_name, output_filename):
+
+	query_str = """select * from public.concept join {codes_table_name} using (concept_id);""".format(codes_table_name=codes_table_name)
+	table_output = run_query(query_str)
+	df = pd.DataFrame(table_output)
+	if len(df)==0:
+		return
+	df = df.sort_values(by=['vocabulary_id','concept_id'])
+	df.to_csv(output_filename, sep=',', index=False)
+
 def create_eval_table(evaltable_name):
 	drop_query_str = """drop table {evaltable_name};""".format(evaltable_name=evaltable_name)
 	try:
@@ -87,6 +97,8 @@ def create_eval_table(evaltable_name):
 		print '--failed to create new evaltable:', evaltable_name
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
+
+
 
 def create_patient_table(codes_table_name, patient_table_name, condition_column_name, do_conjunction=False, codes_column_name='concept_id'):
 	drop_query_str = """drop table {patient_table_name};""".format(patient_table_name=patient_table_name)
@@ -407,6 +419,9 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 	# create each patient table for the different concept sets
 	for my_run in LIST_OF_PAT_TABLES:
 		codes_table_name = 'my_codes_' + my_run['suffix']
+		fname = 'concept_set_{codes_table_name}.csv'.format(codes_table_name=codes_table_name)
+		output_filename = os.path.join(output_path, fname)
+		output_table_summary(codes_table_name, output_filename)
 		patient_table_name = 'pats_' + my_run['suffix']
 		condition_column_name = my_run['condition_column_name']
 		do_conjunction = my_run['do_conjunction']
