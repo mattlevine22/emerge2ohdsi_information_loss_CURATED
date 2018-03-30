@@ -57,6 +57,12 @@ def run_sql_script(sql_filename):
 	# 	pdb.set_trace()
 	# 	return
 
+def table_exists(table_name):
+	query_str = """\dt {table_name};""".format(table_name=table_name)
+	table_output = run_query(query_str)
+	df = pd.DataFrame(table_output)
+	return len(df) > 0
+
 def output_table_summary(codes_table_name, output_filename):
 
 	query_str = """select * from public.concept join {codes_table_name} using (concept_id);""".format(codes_table_name=codes_table_name)
@@ -405,11 +411,14 @@ def run_remap(source_table_name, mapped_table_name, output_filename, remap_to_an
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
 
-def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name):
+def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename):
 
 	# make output directory
 	if not os.path.exists(output_path):
 		os.makedirs(output_path)
+
+	# Drop temporary tables
+	run_sql_script(sql_prep_filename)
 
 	# Call psql script to initialize needed tables
 	run_sql_script(sql_filename)
@@ -419,6 +428,9 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 	# create each patient table for the different concept sets
 	for my_run in LIST_OF_PAT_TABLES:
 		codes_table_name = 'my_codes_' + my_run['suffix']
+		if not table_exists(codes_table_name):
+			print "{codes_table_name} does not exist".format(codes_table_name)
+			continue
 		fname = 'concept_set_{codes_table_name}.csv'.format(codes_table_name=codes_table_name)
 		output_filename = os.path.join(output_path, fname)
 		output_table_summary(codes_table_name, output_filename)
