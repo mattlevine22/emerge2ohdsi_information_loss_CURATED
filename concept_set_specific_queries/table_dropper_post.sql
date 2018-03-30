@@ -77,3 +77,4 @@ drop table test_new2;
 drop table tmp1;
 drop table tmp123;
 drop table tmp_old;
+drop table tmp_pats;
