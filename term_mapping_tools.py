@@ -59,8 +59,7 @@ def run_sql_script(sql_filename):
 
 
 def table_exists(table_name):
-	query_str = """SELECT * FROM information_schema.columns WHERE table_name = {table_name};""".format(table_name=table_name)
-	pdb.set_trace()
+	query_str = """SELECT * FROM information_schema.columns WHERE table_name = '{table_name}';""".format(table_name=table_name)
 	try:
 		run_query(query_str)
 		return True
@@ -422,7 +421,6 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 		os.makedirs(output_path)
 
 	# Drop temporary tables
-	pdb.set_trace()
 	run_sql_script(sql_prep_filename)
 
 	# Call psql script to initialize needed tables
