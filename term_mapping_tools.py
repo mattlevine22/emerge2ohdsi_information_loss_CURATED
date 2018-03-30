@@ -414,7 +414,7 @@ def run_remap(source_table_name, mapped_table_name, output_filename, remap_to_an
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
 
-def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_cleanup_filename):
+def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_cleanup_filename=None):
 
 	# make output directory
 	if not os.path.exists(output_path):
@@ -487,7 +487,6 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 		mapped_table_name = 'my_codes_' + comp['suffix']
 
 		if not table_exists(mapped_table_name):
-			print mapped_table_name
 			print "{mapped_table_name} does not exist".format(mapped_table_name=mapped_table_name)
 			continue
 
@@ -521,4 +520,5 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 			print 'Unable to run remap in reverse'
 
 	# run cleanup
-	run_sql_script(sql_cleanup_filename)
+	if sql_cleanup_filename:
+		run_sql_script(sql_cleanup_filename)
