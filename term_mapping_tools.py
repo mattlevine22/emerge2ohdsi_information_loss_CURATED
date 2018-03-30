@@ -421,6 +421,7 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 		os.makedirs(output_path)
 
 	# Drop temporary tables
+	pdb.set_trace()
 	run_sql_script(sql_prep_filename)
 
 	# Call psql script to initialize needed tables
