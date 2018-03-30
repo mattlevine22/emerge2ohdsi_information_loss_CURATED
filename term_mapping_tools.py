@@ -438,7 +438,10 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 			continue
 		fname = 'concept_set_{codes_table_name}.csv'.format(codes_table_name=codes_table_name)
 		output_filename = os.path.join(output_path, fname)
-		output_table_summary(codes_table_name, output_filename)
+		try:
+			output_table_summary(codes_table_name, output_filename)
+		except:
+			pdb.set_trace()
 		patient_table_name = 'pats_' + my_run['suffix']
 		condition_column_name = my_run['condition_column_name']
 		do_conjunction = my_run['do_conjunction']
