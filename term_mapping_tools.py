@@ -57,8 +57,9 @@ def run_sql_script(sql_filename):
 	# 	pdb.set_trace()
 	# 	return
 
+
 def table_exists(table_name):
-	query_str = """\dt {table_name};""".format(table_name=table_name)
+	query_str = """SELECT column_name FROM information_schema.columns WHERE table_name = {table_name};""".format(table_name=table_name)
 	table_output = run_query(query_str)
 	df = pd.DataFrame(table_output)
 	return len(df) > 0
