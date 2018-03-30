@@ -432,6 +432,8 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 	for my_run in LIST_OF_PAT_TABLES:
 		codes_table_name = 'my_codes_' + my_run['suffix']
 		if not table_exists(codes_table_name):
+			print my_run['suffix']
+			print codes_table_name
 			print "{codes_table_name} does not exist".format(codes_table_name=codes_table_name)
 			continue
 		fname = 'concept_set_{codes_table_name}.csv'.format(codes_table_name=codes_table_name)
