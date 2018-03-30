@@ -59,10 +59,12 @@ def run_sql_script(sql_filename):
 
 
 def table_exists(table_name):
-	query_str = """SELECT column_name FROM information_schema.columns WHERE table_name = {table_name};""".format(table_name=table_name)
-	table_output = run_query(query_str)
-	df = pd.DataFrame(table_output)
-	return len(df) > 0
+	query_str = """SELECT * FROM information_schema.columns WHERE table_name = {table_name};""".format(table_name=table_name)
+	try:
+		run_query(query_str)
+		return True
+	except:
+		return False
 
 def output_table_summary(codes_table_name, output_filename):
 
