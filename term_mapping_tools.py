@@ -60,6 +60,7 @@ def run_sql_script(sql_filename):
 
 def table_exists(table_name):
 	query_str = """SELECT * FROM information_schema.columns WHERE table_name = {table_name};""".format(table_name=table_name)
+	pdb.set_trace()
 	try:
 		run_query(query_str)
 		return True
