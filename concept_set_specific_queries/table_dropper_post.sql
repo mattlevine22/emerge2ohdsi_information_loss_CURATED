@@ -17,7 +17,6 @@ drop table foo7;
 drop table foofoo;
 drop table foofoo_map;
 drop table foofoo_src;
-drop table full_fake_condition_occurrence;
 drop table full_fake_condition_occurrence_old;
 drop table goo;
 drop table icd2snomed_person_prevalence;
