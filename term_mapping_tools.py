@@ -414,7 +414,7 @@ def run_remap(source_table_name, mapped_table_name, output_filename, remap_to_an
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
 
-def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename):
+def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_cleanup_filename):
 
 	# make output directory
 	if not os.path.exists(output_path):
@@ -485,6 +485,12 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 			continue
 
 		mapped_table_name = 'my_codes_' + comp['suffix']
+
+		if not table_exists(mapped_table_name):
+			print mapped_table_name
+			print "{mapped_table_name} does not exist".format(mapped_table_name=mapped_table_name)
+			continue
+
 		print 'ANALYZING ICD9CM REMAP FOR',source_table_name,'vs',mapped_table_name
 
 		# remap to ICD9 codes
@@ -514,3 +520,5 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 		except:
 			print 'Unable to run remap in reverse'
 
+	# run cleanup
+	run_sql_script(sql_cleanup_filename)
