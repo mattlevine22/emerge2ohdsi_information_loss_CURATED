@@ -5,7 +5,7 @@ drop table my_codes_src_original;
 create table my_codes_src_original as
 select distinct concept_code as src_concept_code, concept_id as src_concept_id, vocabulary_id as src_vocabulary_id, concept_id, vocabulary_id
 from public.concept
-where vocabulary_id='ICD9CM' and 
+where vocabulary_id='ICD9CM' and
 concept_code like '540%';
 
 -- AppyGoldStd
@@ -46,16 +46,6 @@ where concept_id IN (
 4310400
 );
 
-
--- Eric Jin's concept set on atlas
-drop table my_codes_sno_ke_pj;
-create table my_codes_sno_ke_pj as
-select distinct public.concept_ancestor.descendant_concept_id as concept_id
-from (select distinct concept_id from public.concept where concept_id IN (
-0)
-) x
-left join public.concept_ancestor on x.concept_id = public.concept_ancestor.ancestor_concept_id
-order by concept_id;
 
 -- AppyMimic
 drop table my_codes_sno_ke_mimic;
@@ -129,7 +119,7 @@ update tmp
 		and min_levels_of_separation = 1;
 
 drop table desc_table;
-create table desc_table as 
+create table desc_table as
 select concept_id, MAX(has_desc) as has_desc, MAX(has_child) as has_child
 from tmp
 group by concept_id
@@ -139,7 +129,7 @@ drop table tmp;
 -- SNO_ke_gh on DB (NO DESC included if code has child)
 drop table my_codes_sno_map_nodesc_if_desc;
 create table my_codes_sno_map_nodesc_if_desc as
-select distinct c0.src_concept_code, c0.src_concept_id, c0.src_vocabulary_id, 
+select distinct c0.src_concept_code, c0.src_concept_id, c0.src_vocabulary_id,
 public.concept_ancestor.descendant_concept_id as concept_id,
 public.concept.vocabulary_id as vocabulary_id
 from my_codes_sno_map_no_desc as c0
@@ -154,7 +144,7 @@ order by src_concept_code;
 
 drop table my_codes_sno_map_nodesc_if_child;
 create table my_codes_sno_map_nodesc_if_child as
-select distinct c0.src_concept_code, c0.src_concept_id, c0.src_vocabulary_id, 
+select distinct c0.src_concept_code, c0.src_concept_id, c0.src_vocabulary_id,
 public.concept_ancestor.descendant_concept_id as concept_id,
 public.concept.vocabulary_id as vocabulary_id
 from my_codes_sno_map_no_desc as c0

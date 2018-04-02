@@ -114,18 +114,6 @@ where concept_id IN (
 );
 
 
--- Eric Jin's concept set on atlas
--- None
-drop table my_codes_sno_ke_pj;
-create table my_codes_sno_ke_pj as
-select distinct public.concept_ancestor.descendant_concept_id as concept_id
-from (select distinct concept_id from public.concept where concept_id IN (
-0
-)
-) x
-left join public.concept_ancestor on x.concept_id = public.concept_ancestor.ancestor_concept_id
-order by concept_id;
-
 -- CrohnMimic
 -- Crohn: USE ALL DESCENDANTS FOR THIS ONE
 drop table my_codes_sno_ke_mimic;
