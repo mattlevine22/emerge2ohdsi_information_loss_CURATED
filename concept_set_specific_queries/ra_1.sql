@@ -512,6 +512,19 @@ where concept_id IN (
 )
 order by concept_id;
 
+-- Mimic
+drop table my_codes_sno_ke_mimic2;
+create table my_codes_sno_ke_mimic2 as
+select distinct concept_id
+from public.concept
+where concept_id IN (
+80809,
+81097,
+78230
+)
+order by concept_id;
+
+
 -- Intent
 drop table my_codes_sno_ke_gh_optimal;
 create table my_codes_sno_ke_gh_optimal as
