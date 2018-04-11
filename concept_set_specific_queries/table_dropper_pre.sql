@@ -7,6 +7,7 @@ drop table my_codes_sno_ke_gh_optimal2;
 drop table my_codes_sno_ke_gh_optimal_control;
 drop table my_codes_sno_ke_mimic;
 drop table my_codes_sno_ke_mimic_old;
+drop table my_codes_sno_ke_mimic2;
 drop table my_codes_sno_ke_pj;
 drop table my_codes_sno_map;
 drop table my_codes_sno_map_all_desc;
