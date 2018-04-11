@@ -480,46 +480,47 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 			print 'COMPARING',reference_table_name,'vs',comparator_table_name
 			compare_patient_tables(reference_table_name, comparator_table_name, idx, query_filename, concept_set_name, evaltable_name)
 
-	seed_suffix = 'src_original'
-	source_table_name = 'my_codes_' + seed_suffix
-	for comp in LIST_OF_PAT_TABLES:
-		if comp['suffix'] is seed_suffix or comp['suffix'] is 'src_intent':
-			continue
+	my_suffices = ['src_original','src_intent']
+	for seed_suffix in my_suffices:
+		source_table_name = 'my_codes_' + seed_suffix
+		for comp in LIST_OF_PAT_TABLES:
+			if comp['suffix'] in my_suffices:
+				continue
 
-		mapped_table_name = 'my_codes_' + comp['suffix']
+			mapped_table_name = 'my_codes_' + comp['suffix']
 
-		if not table_exists(mapped_table_name):
-			print "{mapped_table_name} does not exist".format(mapped_table_name=mapped_table_name)
-			continue
+			if not table_exists(mapped_table_name):
+				print "{mapped_table_name} does not exist".format(mapped_table_name=mapped_table_name)
+				continue
 
-		print 'ANALYZING ICD9CM REMAP FOR',source_table_name,'vs',mapped_table_name
+			print 'ANALYZING ICD9CM REMAP FOR',source_table_name,'vs',mapped_table_name
 
-		# remap to ICD9 codes
-		fname = 'remapped_icd9_code_impact_REF{seed_suffix}_VS{comp_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
-		output_filename = os.path.join(output_path, fname)
-		run_remap(source_table_name, mapped_table_name, output_filename, remap_to_any_codes=False)
-
-		# remap to any codes (especially interested in finding the ICD10s)
-		print 'Now doing any-code remap...'
-		fname = 'remapped_any_code_impact_REF{seed_suffix}_VS{comp_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
-		output_filename = os.path.join(output_path, fname)
-		run_remap(source_table_name, mapped_table_name, output_filename, remap_to_any_codes=True)
-
-		# run reverse
-		try:
-			print 'ANALYZING ICD9CM REMAP FOR',mapped_table_name,'vs',source_table_name
 			# remap to ICD9 codes
-			fname = 'remapped_icd9_code_impact_REF{comp_suffix}_VS{seed_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
+			fname = 'remapped_icd9_code_impact_REF{seed_suffix}_VS{comp_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
 			output_filename = os.path.join(output_path, fname)
-			run_remap(mapped_table_name, source_table_name, output_filename, remap_to_any_codes=False)
+			run_remap(source_table_name, mapped_table_name, output_filename, remap_to_any_codes=False)
 
-			print 'Now doing any-code remap...'
 			# remap to any codes (especially interested in finding the ICD10s)
-			fname = 'remapped_any_code_impact_REF{comp_suffix}_VS{seed_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
+			print 'Now doing any-code remap...'
+			fname = 'remapped_any_code_impact_REF{seed_suffix}_VS{comp_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
 			output_filename = os.path.join(output_path, fname)
-			run_remap(mapped_table_name, source_table_name, output_filename, remap_to_any_codes=True)
-		except:
-			print 'Unable to run remap in reverse'
+			run_remap(source_table_name, mapped_table_name, output_filename, remap_to_any_codes=True)
+
+			# run reverse
+			try:
+				print 'ANALYZING ICD9CM REMAP FOR',mapped_table_name,'vs',source_table_name
+				# remap to ICD9 codes
+				fname = 'remapped_icd9_code_impact_REF{comp_suffix}_VS{seed_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
+				output_filename = os.path.join(output_path, fname)
+				run_remap(mapped_table_name, source_table_name, output_filename, remap_to_any_codes=False)
+
+				print 'Now doing any-code remap...'
+				# remap to any codes (especially interested in finding the ICD10s)
+				fname = 'remapped_any_code_impact_REF{comp_suffix}_VS{seed_suffix}.csv'.format(seed_suffix=seed_suffix, comp_suffix=comp['suffix'])
+				output_filename = os.path.join(output_path, fname)
+				run_remap(mapped_table_name, source_table_name, output_filename, remap_to_any_codes=True)
+			except:
+				print 'Unable to run remap in reverse'
 
 	# run cleanup
 	if sql_cleanup_filename:
