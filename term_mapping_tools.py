@@ -19,6 +19,7 @@ LIST_OF_PAT_TABLES = [{'suffix': 'src_original', 'condition_column_name': 'condi
 						{'suffix': 'sno_map_nodesc_if_child', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
 						{'suffix': 'sno_ke_pj', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
 						{'suffix': 'sno_ke_mimic', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
+						{'suffix': 'sno_ke_mimic2', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
 						{'suffix': 'sno_ke_mimic_old', 'condition_column_name': 'condition_concept_id', 'do_conjunction': True},
 						{'suffix': 'sno_ke_gh_optimal', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
 						{'suffix': 'sno_ke_gh_optimal2', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
