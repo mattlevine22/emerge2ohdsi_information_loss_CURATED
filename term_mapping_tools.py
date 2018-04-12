@@ -23,6 +23,14 @@ LIST_OF_PAT_TABLES = [{'suffix': 'src_original', 'condition_column_name': 'condi
 						{'suffix': 'sno_ke_mimic_old', 'condition_column_name': 'condition_concept_id', 'do_conjunction': True},
 						{'suffix': 'sno_ke_gh_optimal', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False},
 						{'suffix': 'sno_ke_gh_optimal2', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_1a', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_1b', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_1c', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_1d', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_2a', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_2b', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_2c', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
+						{'suffix': 'sno_ke_gh_optimal_2d', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
 ]
 
 def run_query(query_str):
@@ -64,6 +72,13 @@ def table_exists(table_name):
 	table_output = run_query(query_str)
 	df = pd.DataFrame(table_output)
 	return len(df) > 0
+
+def drop_table(table_name):
+	if table_exists(table_name):
+		drop_query_str = """drop table {table_name};""".format(table_name=table_name)
+		run_query(drop_query_str)
+	else:
+		return
 
 def output_table_summary(codes_table_name, output_filename):
 
@@ -523,5 +538,11 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 				print 'Unable to run remap in reverse'
 
 	# run cleanup
+	for my_run in LIST_OF_PAT_TABLES:
+		codes_table_name = 'my_codes_' + my_run['suffix']
+		patient_table_name = 'pats_' + my_run['suffix']
+		drop_table(codes_table_name)
+		drop_table(patient_table_name)
+
 	if sql_cleanup_filename:
 		run_sql_script(sql_cleanup_filename)
