@@ -33,6 +33,9 @@ LIST_OF_PAT_TABLES = [{'suffix': 'src_original', 'condition_column_name': 'condi
 						{'suffix': 'sno_ke_gh_optimal_2d', 'condition_column_name': 'condition_concept_id', 'do_conjunction': False}
 ]
 
+AUTOMAP_FILENAME = './auto_mapping.sql'
+
+
 def run_query(query_str):
 	'''set up everything to make a database query'''
 	query_str = query_str.replace('\n',' ')
@@ -428,7 +431,7 @@ def run_remap(source_table_name, mapped_table_name, output_filename, remap_to_an
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
 
-def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_cleanup_filename=None):
+def run_mapping(output_path, sql_concept_specific_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_auto_map_filename=AUTOMAP_FILENAME, sql_cleanup_filename=None):
 
 	# make output directory
 	if not os.path.exists(output_path):
@@ -438,8 +441,9 @@ def run_mapping(output_path, sql_filename, idx, query_filename, concept_set_name
 	run_sql_script(sql_prep_filename)
 
 	# Call psql script to initialize needed tables
-	run_sql_script(sql_filename)
-	# command_str = """psql {dbname} {dbuser} -a -f {sql_filename} &> {sql_log_filename}""".format(dbname=DB['NAME'], dbuser=DB['USER'], sql_filename=sql_filename, sql_log_filename=sql_log_filename)
+	run_sql_script(sql_concept_specific_filename)
+	run_sql_script(sql_auto_map_filename)
+	# command_str = """psql {dbname} {dbuser} -a -f {sql_concept_specific_filename} &> {sql_log_filename}""".format(dbname=DB['NAME'], dbuser=DB['USER'], sql_concept_specific_filename=sql_concept_specific_filename, sql_log_filename=sql_log_filename)
 	# os.system(command_str)
 
 	# create each patient table for the different concept sets
