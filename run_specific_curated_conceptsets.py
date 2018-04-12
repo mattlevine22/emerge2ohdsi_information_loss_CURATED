@@ -6,7 +6,7 @@ fake_etl_sql_filename = './fake_condition_mappings2.sql'
 sql_prep_filename = './concept_set_specific_queries/table_dropper_pre.sql'
 sql_cleanup_filename = './concept_set_specific_queries/table_dropper_post.sql'
 evaltable_name = 'evaltable_concept_sets_new2'
-make_new_fake_condition_table = True # setting to true will erase the previous fake condition table
+make_new_fake_condition_table = False # setting to true will erase the previous fake condition table
 make_new_evaltable = True # setting to true will erase the table with the name specified in evaltable_name.
 
 
