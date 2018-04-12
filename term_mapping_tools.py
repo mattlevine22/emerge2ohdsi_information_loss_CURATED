@@ -431,7 +431,7 @@ def run_remap(source_table_name, mapped_table_name, output_filename, remap_to_an
 		print "Unexpected error:", sys.exc_info()[0]
 		raise
 
-def run_mapping(output_path, sql_concept_specific_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_auto_map_filename=AUTOMAP_FILENAME, sql_cleanup_filename=None):
+def run_mapping(output_path, sql_concept_specific_filename, idx, query_filename, concept_set_name, evaltable_name, sql_prep_filename, sql_cleanup_filename=None, sql_auto_map_filename=AUTOMAP_FILENAME):
 
 	# make output directory
 	if not os.path.exists(output_path):
