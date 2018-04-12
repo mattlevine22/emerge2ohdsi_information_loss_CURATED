@@ -15,12 +15,12 @@ concept_code IN ('790.21','790.22','790.2','790.29','791.5','277.7','V18.0','V77
 
 -- Sheet "GoldStd", Intent='y'
 drop table my_codes_src_intent;
-create table my_codes_src_intent as
-select distinct concept_id
-from public.concept
-where concept_id IN (
-0
-);
+-- create table my_codes_src_intent as
+-- select distinct concept_code as src_concept_code, concept_id as src_concept_id, vocabulary_id as src_vocabulary_id, concept_id, vocabulary_id
+-- from public.concept
+-- where concept_id IN (
+-- 0
+-- );
 
 -- SNO_ke on DB
 -- Find the patients who have at least one of these KnowEng selected SNOMED codes

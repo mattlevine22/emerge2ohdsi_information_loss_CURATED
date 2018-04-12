@@ -11,7 +11,7 @@ concept_code like '540%';
 -- AppyGoldStd
 drop table my_codes_src_intent;
 create table my_codes_src_intent as
-select distinct concept_id
+select distinct concept_code as src_concept_code, concept_id as src_concept_id, vocabulary_id as src_vocabulary_id, concept_id, vocabulary_id
 from public.concept
 where concept_id IN (
 45601166,
