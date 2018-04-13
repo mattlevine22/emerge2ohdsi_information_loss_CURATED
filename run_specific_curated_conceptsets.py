@@ -1,7 +1,7 @@
 from term_mapping_tools import run_sql_script, create_eval_table, run_mapping
 
 # config
-output_dir = './outputNEW2'
+output_dir = './output'
 fake_etl_sql_filename = './fake_condition_mappings2.sql'
 sql_prep_filename = './concept_set_specific_queries/table_dropper_pre.sql'
 sql_cleanup_filename = './concept_set_specific_queries/table_dropper_post.sql'
