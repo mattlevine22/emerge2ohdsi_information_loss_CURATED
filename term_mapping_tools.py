@@ -502,6 +502,11 @@ def run_mapping(output_path, sql_concept_specific_filename, idx, query_filename,
 	my_suffices = ['src_original','src_intent']
 	for seed_suffix in my_suffices:
 		source_table_name = 'my_codes_' + seed_suffix
+
+		if not table_exists(source_table_name):
+			print "{source_table_name} does not exist".format(source_table_name=source_table_name)
+			continue
+
 		for comp in LIST_OF_PAT_TABLES:
 			if comp['suffix'] in my_suffices:
 				continue
