@@ -166,55 +166,51 @@ where concept_id IN (
 order by concept_id;
 
 
+
 -- SNO_ke_gh on DB (NO DESC included if code has child)
 drop table my_codes_sno_ke_gh_optimal;
 create table my_codes_sno_ke_gh_optimal as
-select distinct concept_id, vocabulary_id
+select distinct concept_id
 from public.concept
 where concept_id IN (
-44784442,
-40481042,
-4009047,
-45773075,
-4103448,
-4185565,
 316139,
-43021840,
-4108244,
-40486933,
-4108245,
-45766165,
-45766164,
-44782655,
-43021842,
-44782719,
-43022068,
-4327205,
-4111554,
-4267800,
-43020421,
-40480602,
-40479576,
-45766166,
-43021841,
 319835,
-36712929,
-4206009,
-443587,
-4023479,
-4199500,
-44782733,
-40480603,
-40479192,
-443580,
-40481043,
-444031,
-40482727,
-45766167,
-4139864,
 439846,
+444031,
+4023479
+)
+UNION
+select distinct c2.concept_id
+from public.concept as c1
+left join public.concept_ancestor as a1 on c1.concept_id = a1.ancestor_concept_id
+left join public.concept c2 on c2.concept_id = a1.descendant_concept_id
+where c2.invalid_reason is null
+and c1.concept_id IN (
+443580,
+443587,
+4009047,
+4103448,
+4108244,
+4108245,
+4111554,
+4139864,
+4199500,
+4206009,
+4242669,
+4267800,
 4311437,
-44782718,
-4242669)
+4327205,
+40479192,
+40479576,
+40480603,
+40481042,
+40482727,
+40486933,
+43022068,
+44782655,
+44784442,
+45766164
+)
 order by concept_id;
+
 
