@@ -85,7 +85,7 @@ def drop_table(table_name):
 
 def output_table_summary(codes_table_name, output_filename):
 
-	query_str = """select * from public.concept join {codes_table_name} using (concept_id);""".format(codes_table_name=codes_table_name)
+	query_str = """select concept_id, concept_name, concept_code, vocabulary_id from public.concept join {codes_table_name} using (concept_id);""".format(codes_table_name=codes_table_name)
 	table_output = run_query(query_str)
 	df = pd.DataFrame(table_output)
 	if len(df)==0:
